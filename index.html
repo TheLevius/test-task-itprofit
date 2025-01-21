@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Test Task ITPROFIT</title>
+</head>
+
+<body>
+
+	<div class="app" id="app">
+		<h1>Something</h1>
+		<form class="form" id="feedback-form" action="/submit" method="POST" novalidate aria-label="Форма обратной связи">
+			<fieldset class="form__item form__item--flexible form__item--rm_25">
+				<legend class="form__legend"><label class="form__label" for="feedback-name">Имя:</label></legend>
+				<input class="form__text" type="text" id="feedback-name" name="name" placeholder="Ваше имя">
+				<div class="form__status form--error" aria-live="polite"></div>
+			</fieldset>
+			<fieldset class="form__item form__item--flexible">
+				<legend class="form__legend"><label class="form__label" for="feedback-email">Email:</label></legend>
+				<input class="form__text" type="email" id="feedback-email" name="email" placeholder="Ваш email">
+				<div class="form__status form--error" aria-live="polite"></div>
+			</fieldset>
+			<fieldset class="form__item">
+				<legend class="form__legend">
+					<label class="form__label" for="feedback-message">Сообщение:</label>
+				</legend>
+				<textarea class="form__textarea" id="feedback-message" name="message" placeholder="Введите ваше сообщение"
+					rows="5"></textarea>
+				<div class="form__status form--error" aria-live="polite"></div>
+			</fieldset>
+			<label class="form__checkbox-group form__checkbox-group--order_1" for="feedback-agree">
+				<input class="form__checkbox" type="checkbox" id="feedback-agree" name="agree" required>
+				<div class="form__caption">
+					Я согласен(а) с <a class="form__link" href="#">политикой конфиденциальности</a>
+				</div>
+				<div class="form__status form--error" aria-live="polite"></div>
+			</label>
+			<button class="button button--primary form__button form--vm-10" id="feedback-submit" type="submit">Отправить
+				сообщение</button>
+		</form>
+	</div>
+
+
+</body>
+
+</html>
