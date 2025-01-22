@@ -10,7 +10,7 @@
 <body>
 
 	<div class="app" id="app">
-		<h1>Something</h1>
+		<h1>Form</h1>
 		<form class="form" id="feedback-form" action="/submit" method="POST" novalidate aria-label="Форма обратной связи">
 			<fieldset class="form__item form__item--flexible form__item--rm_25">
 				<legend class="form__legend"><label class="form__label" for="feedback-name">Имя:</label></legend>
@@ -22,6 +22,11 @@
 				<input class="form__text" type="email" id="feedback-email" name="email" placeholder="Ваш email">
 				<div class="form__status form--error" aria-live="polite"></div>
 			</fieldset>
+			<fieldset class="form__item form__item--flexible">
+				<legend class="form__legend"><label class="form__label" for="feedback-phone">Номер телефона:</label></legend>
+				<input class="form__text" type="text" id="feedback-phone" name="phone" placeholder="Ваш номер телефона">
+				<div class="form__status form--error" aria-live="polite"></div>
+			</fieldset>
 			<fieldset class="form__item">
 				<legend class="form__legend">
 					<label class="form__label" for="feedback-message">Сообщение:</label>
@@ -30,13 +35,6 @@
 					rows="5"></textarea>
 				<div class="form__status form--error" aria-live="polite"></div>
 			</fieldset>
-			<label class="form__checkbox-group form__checkbox-group--order_1" for="feedback-agree">
-				<input class="form__checkbox" type="checkbox" id="feedback-agree" name="agree" required>
-				<div class="form__caption">
-					Я согласен(а) с <a class="form__link" href="#">политикой конфиденциальности</a>
-				</div>
-				<div class="form__status form--error" aria-live="polite"></div>
-			</label>
 			<button class="button button--primary form__button form--vm-10" id="feedback-submit" type="submit">Отправить
 				сообщение</button>
 		</form>

@@ -2,10 +2,11 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+// const loader = require("sass-loader");
 const isProduction = process.env.NODE_ENV === "production";
 
 const config = {
-	entry: "./src/index.js",
+	entry: "./src/js/index.js",
 	output: {
 		filename: "[name].[contenthash].js",
 		path: path.resolve(__dirname, "dist"),
@@ -23,12 +24,16 @@ const config = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "index.html",
+			template: "src/index.html",
 		}),
-		...(isProduction
-			? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
-			: []),
-	],
+		// ...(isProduction
+		// 	? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
+		// 	: []),
+		isProduction &&
+			new MiniCssExtractPlugin({
+				filename: "styles.css",
+			}),
+	].filter(Boolean),
 	module: {
 		rules: [
 			{
@@ -43,18 +48,40 @@ const config = {
 						loader: "css-loader",
 						options: {
 							importLoaders: 1,
+							sourceMap: !isProduction,
 						},
 					},
-					"postcss-loader",
+					{
+						loader: "postcss-loader",
+						options: {
+							sourceMap: !isProduction,
+						},
+					},
 				],
 			},
 			{
 				test: /\.scss$/,
 				use: [
 					isProduction ? MiniCssExtractPlugin.loader : "style-loader",
-					"css-loader",
-					"postcss-loader",
-					"sass-loader",
+					{
+						loader: "css-loader",
+						options: {
+							importLoaders: 2,
+							sourceMap: !isProduction,
+						},
+					},
+					{
+						loader: "postcss-loader",
+						options: {
+							sourceMap: !isProduction,
+						},
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: !isProduction,
+						},
+					},
 				],
 			},
 			{
