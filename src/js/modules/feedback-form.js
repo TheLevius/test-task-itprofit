@@ -7,12 +7,34 @@ import {
 } from "./../utils/validators";
 import { createRender } from "./../utils/render";
 
+const extractor = {
+	text: (node) => node.value.trim(),
+	phone: (node) => node.inputmask.unmaskedvalue(),
+	checkbox: (node) => node.checked,
+};
+
 export async function feedbackFormProcess(formNode) {
 	const checkers = new Map([
-		["feedback-name", { validate: nameValidator, name: "name" }],
-		["feedback-email", { validate: emailValidator, name: "email" }],
-		["feedback-phone", { validate: phoneValidator, name: "phone" }],
-		["feedback-message", { validate: messageValidator, name: "message" }],
+		[
+			"feedback-name",
+			{ validate: nameValidator, name: "name", extract: extractor.text },
+		],
+		[
+			"feedback-email",
+			{ validate: emailValidator, name: "email", extract: extractor.text },
+		],
+		[
+			"feedback-phone",
+			{ validate: phoneValidator, name: "phone", extract: extractor.phone },
+		],
+		[
+			"feedback-message",
+			{
+				validate: messageValidator,
+				name: "message",
+				extract: extractor.text,
+			},
+		],
 	]);
 	const statusSetup = {
 		nodeSelector: ".form__status",
@@ -21,16 +43,14 @@ export async function feedbackFormProcess(formNode) {
 	};
 
 	const render = createRender(statusSetup);
-	const { errorCount } = validateForm(formNode, checkers, render);
+	const { errorCount, validatedValues } = validateForm(
+		formNode,
+		checkers,
+		render
+	);
 	if (errorCount === 0) {
 		console.info("Валидация формы прошла успешно");
-		const selectedData = selectData(formNode, [
-			"name",
-			"email",
-			"phone",
-			"message",
-		]);
-		const dataJSON = JSON.stringify(selectedData);
+		const dataJSON = JSON.stringify(validatedValues);
 		const response = await sendFeedback(dataJSON).catch(console.error);
 		if (response.ok) {
 			formNode.reset();
@@ -40,12 +60,15 @@ export async function feedbackFormProcess(formNode) {
 	}
 }
 export function validateForm(formNode, checkers, render) {
+	const validatedValues = {};
 	let errorCount = 0;
-	checkers.forEach((value, id) => {
+	checkers.forEach((options, id) => {
 		const element = formNode.elements[id];
-		const result = value.validate(element);
-
-		if (result !== "OK") {
+		const value = options.extract(element);
+		const result = options.validate(value);
+		if (result === "OK") {
+			validatedValues[id] = value;
+		} else {
 			errorCount += 1;
 		}
 		render(element, result);
@@ -53,13 +76,15 @@ export function validateForm(formNode, checkers, render) {
 
 	return {
 		errorCount,
+		validatedValues,
 	};
 }
 
-export function selectData(node, dataNames) {
-	const formData = new FormData(node);
-	return dataNames.reduce((data, name) => {
-		data[name] = formData.get(name);
-		return data;
-	}, {});
-}
+// export function selectData(node, checkers) {
+// 	const data = {};
+// 	checkers.forEach((options, id) => {
+// 		data[id] = options.extract(node.elements[id]);
+// 	});
+
+// 	return data;
+// }

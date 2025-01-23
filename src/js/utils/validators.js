@@ -1,5 +1,4 @@
-export function nameValidator(node) {
-	const value = node.value.trim();
+export function nameValidator(value) {
 	if (!value) {
 		return "Обязательно для заполнения";
 	}
@@ -23,8 +22,7 @@ export function nameValidator(node) {
 	}
 	return "OK";
 }
-export function emailValidator(node) {
-	const value = node.value.trim();
+export function emailValidator(value) {
 	const maxLocalName = 64;
 	const maxDomainName = 255;
 	const invalidFormat = "Формат некорректный.";
@@ -51,15 +49,18 @@ export function emailValidator(node) {
 	}
 	return "OK";
 }
-export function phoneValidator(node) {
-	if (!node.inputmask.isComplete()) {
-		return "Неполный номер";
+export function phoneValidator(value) {
+	if (value.length < 13) {
+		("Неполный номер");
+	}
+	const phoneRegex = /^\+375\d{9}$/;
+	if (!phoneRegex.test(value)) {
+		return "Неверный формат номера";
 	}
 
-	return node.inputmask.isValid() && "OK";
+	return "OK";
 }
-export function messageValidator(node) {
-	const value = node.value.trim();
+export function messageValidator(value) {
 	const minLen = 10;
 	const maxLen = 500;
 	if (!value) {
@@ -77,8 +78,4 @@ export function messageValidator(node) {
 		return "Текст содержит недопустимые символы.";
 	}
 	return "OK";
-}
-export function agreeValidator(node) {
-	const value = node.checked;
-	return value ? "OK" : "Согласие обязательно";
 }

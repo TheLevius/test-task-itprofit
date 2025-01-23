@@ -86,9 +86,24 @@ const config = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
+				exclude: /node_modules|server/,
 				use: {
 					loader: "swc-loader",
+					options: {
+						jsc: {
+							parser: {
+								syntax: "ecmascript",
+								jsx: false,
+								dynamicImport: true,
+							},
+							target: "es2020",
+							loose: false,
+							externalHelpers: false,
+						},
+						module: {
+							type: "commonjs",
+						},
+					},
 				},
 			},
 		],
