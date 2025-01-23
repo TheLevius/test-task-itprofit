@@ -45,7 +45,12 @@ export async function feedbackFormProcess(formNode) {
 	const render = createRender(statusSetup);
 	const serverValidation = true;
 	if (serverValidation) {
-		sendFeedbackAndRender(selectData(formNode, checkers), formNode, render);
+		sendFeedbackAndRender(
+			selectData(formNode, checkers),
+			formNode,
+			checkers,
+			render
+		);
 	} else {
 		const { errorCount, validatedValues } = validateForm(
 			formNode,
@@ -54,7 +59,7 @@ export async function feedbackFormProcess(formNode) {
 		);
 		if (errorCount === 0) {
 			console.info("Валидация формы прошла успешно");
-			sendFeedbackAndRender(validatedValues, formNode, render);
+			sendFeedbackAndRender(validatedValues, formNode, checkers, render);
 		} else {
 			console.info("Ошибка валидации формы");
 		}
@@ -95,27 +100,32 @@ export function selectData(node, checkers) {
 }
 
 export const responseStatusRender = {
-	success: (data, formNode, render) => {
+	success: (data, formNode, checkers, render) => {
 		formNode.reset();
+		checkers.forEach((_, id) => {
+			render(formNode.elements[id], "OK");
+		});
 		const resultStatusNode = formNode.querySelector("#result-status");
-		resultStatusNode.textContent = data?.msg;
-		console.log(resultStatusNode);
+		resultStatusNode.textContent = data.msg;
 		console.info("Серверная валидация формы прошла успешно");
 	},
-	error: (data, formNode, render) => {
-		const fieldIds = Object.keys(data.fields);
-		for (const id of fieldIds) {
-			render(formNode.elements[id], data[id]);
-		}
+	error: (data, formNode, checkers, render) => {
+		checkers.forEach((_, id) => {
+			if (Object.hasOwn(data.fields, id)) {
+				render(formNode.elements[id], data.fields[id]);
+			} else {
+				render(formNode.elements[id], "OK");
+			}
+		});
 		const resultStatusNode = formNode.querySelector("#result-status");
-		resultStatusNode.textContent = data?.msg;
+		resultStatusNode.textContent = data.msg;
 		console.info("Серверная ошибка валидации формы");
 	},
 };
-async function sendFeedbackAndRender(fields, formNode, render) {
+async function sendFeedbackAndRender(fields, formNode, checkers, render) {
 	const response = await sendFeedback(fields).catch(console.error);
 	if (response.ok) {
 		const data = await response.json();
-		responseStatusRender[data.status](data, formNode, render);
+		responseStatusRender[data.status](data, formNode, checkers, render);
 	}
 }
