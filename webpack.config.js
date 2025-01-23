@@ -21,6 +21,14 @@ const config = {
 		open: true,
 		port: 3000,
 		watchFiles: ["src/**/*.html", "./*.html"],
+		proxy: [
+			{
+				context: ["/api"],
+				target: "http://localhost:5000",
+				secure: false,
+				changeOrigin: true,
+			},
+		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

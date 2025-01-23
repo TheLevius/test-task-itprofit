@@ -1,5 +1,5 @@
 const { resolve } = require("node:path");
-const fastify = require("fastify")({ logger: true });
+const fastify = require("fastify")({ logger: false });
 
 fastify.register(require("@fastify/static"), {
 	root: resolve(__dirname, "../dist"),
@@ -15,8 +15,8 @@ fastify.post("/api/feedback", async (request, reply) => {
 
 	return {
 		status: "success",
-		message: "Feedback received",
-		data: request.body,
+		msg: "Ваша заявка успешно отправлена",
+		fields: request.body,
 	};
 });
 

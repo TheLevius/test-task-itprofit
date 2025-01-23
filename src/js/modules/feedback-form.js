@@ -43,24 +43,27 @@ export async function feedbackFormProcess(formNode) {
 	};
 
 	const render = createRender(statusSetup);
-	const { errorCount, validatedValues } = validateForm(
-		formNode,
-		checkers,
-		render
-	);
-	if (errorCount === 0) {
-		console.info("Валидация формы прошла успешно");
-		const dataJSON = JSON.stringify(validatedValues);
-		const response = await sendFeedback(dataJSON).catch(console.error);
-		if (response.ok) {
-			formNode.reset();
-		}
+	const serverValidation = true;
+	if (serverValidation) {
+		sendFeedbackAndRender(selectData(formNode, checkers), formNode, render);
 	} else {
-		console.info("Ошибка валидации формы");
+		const { errorCount, validatedValues } = validateForm(
+			formNode,
+			checkers,
+			render
+		);
+		if (errorCount === 0) {
+			console.info("Валидация формы прошла успешно");
+			sendFeedbackAndRender(validatedValues, formNode, render);
+		} else {
+			console.info("Ошибка валидации формы");
+		}
 	}
 }
+
 export function validateForm(formNode, checkers, render) {
 	const validatedValues = {};
+	const errors = {};
 	let errorCount = 0;
 	checkers.forEach((options, id) => {
 		const element = formNode.elements[id];
@@ -70,6 +73,7 @@ export function validateForm(formNode, checkers, render) {
 			validatedValues[id] = value;
 		} else {
 			errorCount += 1;
+			errors[id] = result;
 		}
 		render(element, result);
 	});
@@ -77,14 +81,41 @@ export function validateForm(formNode, checkers, render) {
 	return {
 		errorCount,
 		validatedValues,
+		errors,
 	};
 }
 
-// export function selectData(node, checkers) {
-// 	const data = {};
-// 	checkers.forEach((options, id) => {
-// 		data[id] = options.extract(node.elements[id]);
-// 	});
+export function selectData(node, checkers) {
+	const data = {};
+	checkers.forEach((options, id) => {
+		data[id] = options.extract(node.elements[id]);
+	});
 
-// 	return data;
-// }
+	return data;
+}
+
+export const responseStatusRender = {
+	success: (data, formNode, render) => {
+		formNode.reset();
+		const resultStatusNode = formNode.querySelector("#result-status");
+		resultStatusNode.textContent = data?.msg;
+		console.log(resultStatusNode);
+		console.info("Серверная валидация формы прошла успешно");
+	},
+	error: (data, formNode, render) => {
+		const fieldIds = Object.keys(data.fields);
+		for (const id of fieldIds) {
+			render(formNode.elements[id], data[id]);
+		}
+		const resultStatusNode = formNode.querySelector("#result-status");
+		resultStatusNode.textContent = data?.msg;
+		console.info("Серверная ошибка валидации формы");
+	},
+};
+async function sendFeedbackAndRender(fields, formNode, render) {
+	const response = await sendFeedback(fields).catch(console.error);
+	if (response.ok) {
+		const data = await response.json();
+		responseStatusRender[data.status](data, formNode, render);
+	}
+}
