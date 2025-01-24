@@ -1,1 +1,6 @@
 @import url('normalize.css');
+@import url('components/modal.scss');
+
+.no-scroll {
+	overflow: hidden;
+}
