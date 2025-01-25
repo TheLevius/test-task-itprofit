@@ -8,9 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@fastify/static':
+        specifier: ^8.0.4
+        version: 8.0.4
+      fastify:
+        specifier: ^5.2.1
+        version: 5.2.1
+      fastify-cli:
+        specifier: ^7.3.0
+        version: 7.3.0
       inputmask:
-        specifier: ^5.0.9
-        version: 5.0.9
+        specifier: 5.0.10-beta.11
+        version: 5.0.10-beta.11
       normalize.css:
         specifier: ^8.0.1
         version: 8.0.1
@@ -18,9 +27,6 @@ importers:
         specifier: ^5.97.1
         version: 5.97.1(@swc/core@1.10.9)(webpack-cli@6.0.1)
     devDependencies:
-      '@fastify/static':
-        specifier: ^8.0.4
-        version: 8.0.4
       '@swc/cli':
         specifier: ^0.6.0
         version: 0.6.0(@swc/core@1.10.9)(chokidar@4.0.3)
@@ -39,12 +45,6 @@ importers:
       css-loader:
         specifier: ^7.1.2
         version: 7.1.2(webpack@5.97.1)
-      fastify:
-        specifier: ^5.2.1
-        version: 5.2.1
-      fastify-cli:
-        specifier: ^7.3.0
-        version: 7.3.0
       html-webpack-plugin:
         specifier: ^5.6.3
         version: 5.6.3(webpack@5.97.1)
@@ -2549,8 +2549,8 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  inputmask@5.0.9:
-    resolution: {integrity: sha512-s0lUfqcEbel+EQXtehXqwCJGShutgieOaIImFKC/r4reYNvX3foyrChl6LOEvaEgxEbesePIrw1Zi2jhZaDZbQ==}
+  inputmask@5.0.10-beta.11:
+    resolution: {integrity: sha512-+tBe7fbGfOmf2frDhhxJHeeBQ4Na00cEl23ie7G+O0TMtFnQDhJYTFnWKi9EdzqaEEG7R82tI5JRr8Ngzbd1RQ==}
 
   inspect-with-kind@1.0.5:
     resolution: {integrity: sha512-MAQUJuIo7Xqk8EVNP+6d3CKq9c80hi4tjIbIAT6lmGW9W6WzlHiu9PS8uSuUYU+Do+j1baiFp3H25XEVxDIG2g==}
@@ -7115,7 +7115,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inputmask@5.0.9: {}
+  inputmask@5.0.10-beta.11: {}
 
   inspect-with-kind@1.0.5:
     dependencies:

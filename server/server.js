@@ -36,10 +36,10 @@ fastify.post("/api/feedback", async (request, reply) => {
 	if (errorCount > 0) {
 		data.status = "error";
 		data.fields = fields;
-		data.msg = "Серверная валидация не пройдена";
+		data.msg = "🚫 Серверная валидация не пройдена";
 	} else {
 		data.status = "success";
-		data.msg = "Ваша заявка успешно отправлена";
+		data.msg = "✅ Ваша заявка успешно отправлена";
 	}
 	return data;
 });

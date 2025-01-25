@@ -13,6 +13,11 @@ const extractor = {
 	checkbox: (node) => node.checked,
 };
 
+const resultStatus = {
+	error: "form__status-result--error",
+	success: "form__status-result--ok",
+};
+
 export async function feedbackFormProcess(formNode) {
 	const checkers = new Map([
 		[
@@ -43,7 +48,9 @@ export async function feedbackFormProcess(formNode) {
 	};
 
 	const render = createRender(statusSetup);
-	const serverValidation = true;
+	const serverValidation = extractor.checkbox(
+		formNode.elements["feedback-validation"]
+	);
 	if (serverValidation) {
 		sendFeedbackAndRender(
 			selectData(formNode, checkers),
@@ -106,8 +113,10 @@ export const responseStatusRender = {
 			render(formNode.elements[id], "OK");
 		});
 		const resultStatusNode = formNode.querySelector("#result-status");
+		resultStatusNode.classList.remove(resultStatus.error);
+		resultStatusNode.classList.add(resultStatus.success);
 		resultStatusNode.textContent = data.msg;
-		console.info("Серверная валидация формы прошла успешно");
+		console.info("✅ Сообщение оправлено успешно");
 	},
 	error: (data, formNode, checkers, render) => {
 		checkers.forEach((_, id) => {
@@ -118,8 +127,10 @@ export const responseStatusRender = {
 			}
 		});
 		const resultStatusNode = formNode.querySelector("#result-status");
+		resultStatusNode.classList.remove(resultStatus.success);
+		resultStatusNode.classList.add(resultStatus.error);
 		resultStatusNode.textContent = data.msg;
-		console.info("Серверная ошибка валидации формы");
+		console.info("🚫 Серверная ошибка валидации формы");
 	},
 };
 async function sendFeedbackAndRender(fields, formNode, checkers, render) {

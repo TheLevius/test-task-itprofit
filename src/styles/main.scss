@@ -1,6 +1,60 @@
 @import url('normalize.css');
 @import url('components/modal.scss');
+@import url('components/feedback-form.scss');
+
+:root {
+	--color-text-primary: #000000;
+  --color-background: #FFFFFF;
+  // --color-accent-background: #FFA501;
+  --color-accent-text: #FFFFFF;
+  --color-overlay: rgba(255, 255, 255, 0.75);
+	--color-text-status-error: rgba(189, 0, 0, 0.8);
+	--color-text-status-ok: rgba(0, 189, 0, 0.8);
+
+	--color-link: var(--color-text-primary);
+	--color-link-visited: rgba(0, 0, 0 , 0.2);
+	--color-link-active: rgba(0, 0, 0, 0.3);
+	--color-link-focus: rgba(0, 0, 0, 0.8);
+	--color-link-hover: rgba(0, 0, 0, 0.7); 
+
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;	
+}
+
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+#app {
+	overflow: hidden;
+}
 
 .no-scroll {
 	overflow: hidden;
+}
+
+.holder {
+	
+	display: flex;
+	flex-direction: column;
+	
+	max-width: 480px;
+	padding: 0 12px;
+	margin: 0 auto;
+}
+@media (min-width: 641px) {
+
+}
+@media (min-width: 641px) {
+	.holder {
+		max-width: 768px;
+	}
 }

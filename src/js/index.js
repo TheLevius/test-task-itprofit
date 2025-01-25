@@ -1,7 +1,7 @@
 import "./../styles/main.scss";
 import Inputmask from "inputmask";
 import { feedbackFormProcess } from "./modules/feedback-form";
-import { phoneMaskSetup } from "./modules/masks";
+import { addPhoneMask, phoneMaskSetup } from "./modules/masks";
 import Modal from "./modules/modal";
 (() => {
 	const modal = new Modal(
@@ -13,9 +13,7 @@ import Modal from "./modules/modal";
 	modal.init();
 
 	const feedbackForm = document.getElementById("feedback-form");
-	const phoneInput = feedbackForm.querySelector("#feedback-phone");
-	const phone = new Inputmask(phoneMaskSetup);
-	phone.mask(phoneInput);
+	addPhoneMask(feedbackForm, "feedback-phone");
 
 	const handleForm = (e) => {
 		e.stopPropagation();

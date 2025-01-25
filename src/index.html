@@ -8,53 +8,158 @@
 </head>
 
 <body>
-
 	<div class="app" id="app">
-		<h1>Form</h1>
-		<form class="form" id="feedback-form" action="/submit" method="POST" novalidate aria-label="Форма обратной связи">
-			<fieldset class="form__item form__item--flexible form__item--rm_25">
-				<legend class="form__legend"><label class="form__label" for="feedback-name">Имя:</label></legend>
-				<input class="form__text" type="text" id="feedback-name" name="name" placeholder="Ваше имя">
-				<div class="form__status form--error" aria-live="polite"></div>
-			</fieldset>
-			<fieldset class="form__item form__item--flexible">
-				<legend class="form__legend"><label class="form__label" for="feedback-email">Email:</label></legend>
-				<input class="form__text" type="email" id="feedback-email" name="email" placeholder="Ваш email">
-				<div class="form__status form--error" aria-live="polite"></div>
-			</fieldset>
-			<fieldset class="form__item form__item--flexible">
-				<legend class="form__legend"><label class="form__label" for="feedback-phone">Номер телефона:</label></legend>
-				<input class="form__text" type="text" id="feedback-phone" name="phone" placeholder="Ваш номер телефона">
-				<div class="form__status form--error" aria-live="polite"></div>
-			</fieldset>
-			<fieldset class="form__item">
-				<legend class="form__legend">
-					<label class="form__label" for="feedback-message">Сообщение:</label>
-				</legend>
-				<textarea class="form__textarea" id="feedback-message" name="message" placeholder="Введите ваше сообщение"
-					rows="5"></textarea>
-				<div class="form__status form--error" aria-live="polite"></div>
-			</fieldset>
-			<button class="button button--primary form__button form--vm-10" id="feedback-submit" type="submit">Отправить
-				сообщение</button>
-			<div class="form__status" id="result-status"></div>
-		</form>
-		<div>
-			<button class="open-modal" id="open-modal-btn">Открыть модальное окно</button>
+		<div class="holder">
+			<h1>Test Task ITProfit</h1>
+			<div>
+				<button class="open-modal" id="open-modal-btn">Открыть модальное окно</button>
+			</div>
+			<form class="form" id="feedback-form" action="/submit" method="POST" novalidate aria-label="Форма обратной связи">
+				<fieldset class="form__item form__item--row_1 form__item--col_span_2">
+					<legend class="form__legend"><label class="form__label" for="feedback-name">Имя:</label></legend>
+					<input class="form__text" type="text" id="feedback-name" name="name" placeholder="Ваше имя">
+					<div class="form__status form--error" aria-live="polite"></div>
+				</fieldset>
+				<fieldset class="form__item form__item--row_2 form__item--col_span_2">
+					<legend class="form__legend"><label class="form__label" for="feedback-email">Email:</label></legend>
+					<input class="form__text" type="email" id="feedback-email" name="email" placeholder="Ваш email">
+					<div class="form__status form--error" aria-live="polite"></div>
+				</fieldset>
+				<fieldset class="form__item form__item--row_2 form__item--col_span_2">
+					<legend class="form__legend"><label class="form__label" for="feedback-phone">Номер телефона:</label></legend>
+					<input class="form__text" type="text" id="feedback-phone" name="phone" placeholder="Ваш номер телефона">
+					<div class="form__status form--error" aria-live="polite"></div>
+				</fieldset>
+				<fieldset class="form__item">
+					<legend class="form__legend">
+						<label class="form__label" for="feedback-message">Сообщение:</label>
+					</legend>
+					<textarea class="form__textarea" id="feedback-message" name="message" placeholder="Введите ваше сообщение"
+						rows="5"></textarea>
+					<div class="form__status form--error" aria-live="polite"></div>
+				</fieldset>
+				<div class="form__item-plus">
+					<label class="form__checkbox-group form__checkbox-group--order_1" for="feedback-validation">
+						<input class="form__checkbox" type="checkbox" id="feedback-validation" name="validation">
+						<span class="form__caption">
+							Только серверная валидация
+						</span>
+						<div class="form__status form--error" aria-live="polite"></div>
+					</label>
+					<button class="button button--primary form__button form--vm-10" id="feedback-submit" type="submit">Отправить
+				</div>
+				<div class="form__status-result" id="result-status"></div>
+			</form>
 		</div>
-		<div class="overlay" id="overlay">
-			<div class="modal" id="modal">
-				<div class="modal__window">
-					<div class="modal__content">
-						<button class="modal__close" id="close-modal-btn">Закрыть модальное окно</button>
-						<p class="modal__text">Содержане модалки</p>
-					</div>
+	</div>
+	</div>
+	<div class="overlay" id="overlay">
+		<div class="modal" id="modal">
+			<div class="modal__window">
+				<div class="modal__content">
+					<button class="modal__close" id="close-modal-btn">Закрыть модальное окно</button>
+					<p class="modal__text">Содержане модалки</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet ante vel purus gravida, non
+						imperdiet justo
+						consequat. Pellentesque imperdiet arcu at orci elementum, ut porta lectus aliquam. Donec rhoncus enim id
+						condimentum
+						sodales. Nullam varius posuere dignissim. Morbi mattis eros eget porta tristique. Curabitur quis lacus
+						malesuada,
+						rhoncus ipsum ut, sagittis lectus. Ut et ultricies enim. Curabitur pretium elit vel nunc tempus lacinia.
+						Nam ac
+						condimentum leo, id elementum arcu. Morbi sit amet mollis mi.
+					</p>
+					Integer facilisis ex ipsum, at semper eros tincidunt ut. Aliquam tincidunt pulvinar aliquam. Phasellus
+					tincidunt tortor
+					vel mauris maximus placerat. Proin quis ex ut est ullamcorper pellentesque quis eleifend ligula. In non
+					tincidunt
+					ligula. Etiam elementum aliquet blandit. Mauris a sollicitudin velit. Vestibulum vehicula dolor eget
+					finibus viverra.
+					Donec in dictum risus, at suscipit massa. Nam finibus a nulla et maximus. Fusce at dolor in neque
+					dignissim congue vitae
+					at libero. Etiam ut erat dignissim, ultricies est in, scelerisque lectus.
+					<p>
+						Aliquam et neque eu mauris aliquam condimentum eget eu quam. Donec ac urna finibus, luctus lectus ac,
+						faucibus felis.
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam dolor
+						purus, lobortis et
+						ullamcorper eu, venenatis eget urna. Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac
+						turpis egestas. Mauris risus purus, vestibulum vel tellus et, hendrerit varius nunc. Quisque arcu
+						sapien, pretium et
+						nibh quis, tincidunt aliquam tortor. Nulla facilisi. Donec ac ante nulla. Maecenas vitae turpis turpis.
+					</p>
+					<p>
+						Aliquam et neque eu mauris aliquam condimentum eget eu quam. Donec ac urna finibus, luctus lectus ac,
+						faucibus felis.
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam dolor
+						purus, lobortis et
+						ullamcorper eu, venenatis eget urna. Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac
+						turpis egestas. Mauris risus purus, vestibulum vel tellus et, hendrerit varius nunc. Quisque arcu
+						sapien, pretium et
+						nibh quis, tincidunt aliquam tortor. Nulla facilisi. Donec ac ante nulla. Maecenas vitae turpis turpis.
+					</p>
+					<p>
+						Aliquam et neque eu mauris aliquam condimentum eget eu quam. Donec ac urna finibus, luctus lectus ac,
+						faucibus felis.
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam dolor
+						purus, lobortis et
+						ullamcorper eu, venenatis eget urna. Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac
+						turpis egestas. Mauris risus purus, vestibulum vel tellus et, hendrerit varius nunc. Quisque arcu
+						sapien, pretium et
+						nibh quis, tincidunt aliquam tortor. Nulla facilisi. Donec ac ante nulla. Maecenas vitae turpis turpis.
+					</p>
+					<p>
+						Aliquam et neque eu mauris aliquam condimentum eget eu quam. Donec ac urna finibus, luctus lectus ac,
+						faucibus felis.
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam dolor
+						purus, lobortis et
+						ullamcorper eu, venenatis eget urna. Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac
+						turpis egestas. Mauris risus purus, vestibulum vel tellus et, hendrerit varius nunc. Quisque arcu
+						sapien, pretium et
+						nibh quis, tincidunt aliquam tortor. Nulla facilisi. Donec ac ante nulla. Maecenas vitae turpis turpis.
+					</p>
+					</p>
+					Integer facilisis ex ipsum, at semper eros tincidunt ut. Aliquam tincidunt pulvinar aliquam. Phasellus
+					tincidunt tortor
+					vel mauris maximus placerat. Proin quis ex ut est ullamcorper pellentesque quis eleifend ligula. In non
+					tincidunt
+					ligula. Etiam elementum aliquet blandit. Mauris a sollicitudin velit. Vestibulum vehicula dolor eget
+					finibus viverra.
+					Donec in dictum risus, at suscipit massa. Nam finibus a nulla et maximus. Fusce at dolor in neque
+					dignissim congue vitae
+					at libero. Etiam ut erat dignissim, ultricies est in, scelerisque lectus.
+					<p>
+					</p>
+					Integer facilisis ex ipsum, at semper eros tincidunt ut. Aliquam tincidunt pulvinar aliquam. Phasellus
+					tincidunt tortor
+					vel mauris maximus placerat. Proin quis ex ut est ullamcorper pellentesque quis eleifend ligula. In non
+					tincidunt
+					ligula. Etiam elementum aliquet blandit. Mauris a sollicitudin velit. Vestibulum vehicula dolor eget
+					finibus viverra.
+					Donec in dictum risus, at suscipit massa. Nam finibus a nulla et maximus. Fusce at dolor in neque
+					dignissim congue vitae
+					at libero. Etiam ut erat dignissim, ultricies est in, scelerisque lectus.
+					<p>
+					</p>
+					Integer facilisis ex ipsum, at semper eros tincidunt ut. Aliquam tincidunt pulvinar aliquam. Phasellus
+					tincidunt tortor
+					vel mauris maximus placerat. Proin quis ex ut est ullamcorper pellentesque quis eleifend ligula. In non
+					tincidunt
+					ligula. Etiam elementum aliquet blandit. Mauris a sollicitudin velit. Vestibulum vehicula dolor eget
+					finibus viverra.
+					Donec in dictum risus, at suscipit massa. Nam finibus a nulla et maximus. Fusce at dolor in neque
+					dignissim congue vitae
+					at libero. Etiam ut erat dignissim, ultricies est in, scelerisque lectus.
+					<p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 </body>
 
 </html>
