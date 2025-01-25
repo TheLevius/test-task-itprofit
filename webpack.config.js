@@ -83,7 +83,7 @@ const config = {
 					{
 						loader: "sass-loader",
 						options: {
-							implementation: require("sass-embedded"), // Используем sass-embedded
+							implementation: require("sass-embedded"),
 							sourceMap: !isProduction,
 						},
 					},
