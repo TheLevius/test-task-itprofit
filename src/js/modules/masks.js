@@ -1,3 +1,4 @@
+import Inputmask from "inputmask";
 export const phoneMaskSetup = {
 	mask: ["+375 (99) 999-99-99"],
 	placeholder: "_",
@@ -11,6 +12,5 @@ export const phoneMaskSetup = {
 export function addPhoneMask(feedbackForm, fieldId) {
 	const phoneInput = feedbackForm.querySelector(`#${fieldId}`);
 	const phone = new Inputmask(phoneMaskSetup);
-
 	phone.mask(phoneInput);
 }

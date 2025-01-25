@@ -39,6 +39,7 @@
 		"fastify-cli": "^7.3.0",
 		"inputmask": "5.0.10-beta.11",
 		"normalize.css": "^8.0.1",
+		"sass-embedded": "^1.83.4",
 		"webpack": "^5.97.1"
 	}
 }

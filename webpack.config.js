@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-// const loader = require("sass-loader");
 const isProduction = process.env.NODE_ENV === "production";
 
 const config = {
@@ -34,9 +33,6 @@ const config = {
 		new HtmlWebpackPlugin({
 			template: "src/index.html",
 		}),
-		// ...(isProduction
-		// 	? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
-		// 	: []),
 		isProduction &&
 			new MiniCssExtractPlugin({
 				filename: "styles.css",
@@ -87,6 +83,7 @@ const config = {
 					{
 						loader: "sass-loader",
 						options: {
+							implementation: require("sass-embedded"), // Используем sass-embedded
 							sourceMap: !isProduction,
 						},
 					},
@@ -116,12 +113,23 @@ const config = {
 			},
 		],
 	},
+	ignoreWarnings: [
+		{
+			module: /sass\.dart\.js/,
+			message: /Critical dependency/,
+		},
+	],
 };
+
 module.exports = () => {
 	if (isProduction) {
 		config.mode = "production";
-
-		config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+		config.plugins.push(
+			new WorkboxWebpackPlugin.GenerateSW({
+				clientsClaim: true,
+				skipWaiting: true,
+			})
+		);
 	} else {
 		config.mode = "development";
 	}
