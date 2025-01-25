@@ -5,7 +5,7 @@ npm install -g pnpm
 ```
 
 в папке проекта
-```
+```javascript
 pnpm install
 pnpm start // http://localhost:5000/
 ```
